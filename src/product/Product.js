@@ -12,7 +12,7 @@ const Product = ({ product }) => {
         <div className="card">
           <div className="card-image">
             <img src={ image ? HOST + image['attributes'].styles[2].url : defaultImage } alt="product" />
-            <a href="#" className="btn-floating btn-large halfway-fab waves-effect waves-light red"><i className="material-icons">shopping_cart</i></a>
+            <button className="btn-floating btn-large halfway-fab waves-effect waves-light red"><i className="material-icons">shopping_cart</i></button>
           </div>
           <div className="card-content">
             <span className="card-title activator grey-text text-darken-4 truncate">{product['attributes'].name}</span>

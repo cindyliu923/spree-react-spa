@@ -1,8 +1,11 @@
 import client from '../api/client';
-import { productsLoad, productsLoadended } from './redux';
+import { productsLoad, productsLoadended, loading } from './redux';
 
 export const loadProducts = (page = 1) => async dispatch => { 
-  const result = await client.products.list({page: page, per_page: 20, include: 'images', sort: '-updated_at'});
+  dispatch(loading());
+  const result = await client.products.list({
+    page: page, per_page: 20, include: 'images', sort: '-updated_at'
+  });
   if (result.isSuccess() && result.success().data.length > 0) {
     return dispatch(productsLoad(result.success().data, result.success().included));
   } else {
