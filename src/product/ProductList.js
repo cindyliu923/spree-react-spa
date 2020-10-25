@@ -7,10 +7,14 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const page = useSelector(state => state.products.page);
   const products = useSelector(state => state.products.products);
+  const diplayMoreBtn = useSelector(state => state.products.diplayMoreBtn);
+  const style = {
+    display: diplayMoreBtn
+  }
 
   useEffect(() => {
-    dispatch(loadProducts(page))
-  }, [])
+    dispatch(loadProducts(1))
+  }, [dispatch])
 
   return (
     <div>
@@ -18,8 +22,8 @@ const ProductList = () => {
         {products.map(product => (
           <Product key={product.id} product={product} />
         ))}
-
-        <a className="col s12 m12 l12 waves-effect waves-light btn" onClick={() => dispatch(loadProducts(page))}>
+        
+        <a className="col s12 m12 l12 waves-effect waves-light btn" style={style} onClick={() => dispatch(loadProducts(page))}>
           MORE
         </a>
       </div>

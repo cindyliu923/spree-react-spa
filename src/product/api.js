@@ -1,9 +1,13 @@
 import client from '../api/client';
-import { productsload } from './redux';
+import { productsLoad, productsLoadended } from './redux';
 
 export const loadProducts = (page = 1) => async dispatch => { 
-  const result = await client.products.list({page: page, sort: '-updated_at'});
-  return dispatch(productsload(result.success().data));
+  const result = await client.products.list({page: page, per_page: 20, include: 'images', sort: '-updated_at'});
+  if (result.isSuccess() && result.success().data.length > 0) {
+    return dispatch(productsLoad(result.success().data, result.success().included));
+  } else {
+    return dispatch(productsLoadended());
+  }
 }
 
 // export default loadProducts;
