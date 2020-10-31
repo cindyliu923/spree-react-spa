@@ -1,5 +1,5 @@
 import client from '../api/client';
-import { cartCreated, cartGeted, cartAdded } from './redux';
+import { cartCreated, cartGeted } from './redux';
 
 export const getCart = () => async (dispatch, getState) => {
   const token = getState().cart.token;
@@ -26,8 +26,7 @@ export const addItem = product => async dispatch => {
   )
 
   if (result.isSuccess()) {
-    dispatch(cartGeted(result.success().data, result.success().included));
-    return dispatch(cartAdded());
+    return dispatch(cartGeted(result.success().data, result.success().included));
   }
 }
 
@@ -35,8 +34,9 @@ export const createCart = () => async dispatch => {
   const result = await client.cart.create()
 
   if (result.isSuccess()) {
+    localStorage.setItem('token', result.success().data.attributes.token);
     dispatch(cartCreated(result.success().data.attributes.token));
-    return result.success().data.attributes.token
+    return result.success().data.attributes.token;
   }
 }
 

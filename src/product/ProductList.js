@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProducts } from '../product/api';
+import { cartCreated } from '../cart/redux';
 import Product from './Product';
 import Loading from '../components/Loading';
  
@@ -12,6 +13,10 @@ const ProductList = () => {
   const isLoading = useSelector(state => state.products.isLoading);
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) { 
+      dispatch(cartCreated(token)); 
+    }
     dispatch(loadProducts(1))
   }, [dispatch])
 

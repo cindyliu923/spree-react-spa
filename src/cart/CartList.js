@@ -5,16 +5,16 @@ import Cart from './Cart';
 const CartList = () => {
   const cartData = useSelector(state => state.cart.cartData);
   const items = useSelector(state => state.cart.items);
-  const hasCartItem = useSelector(state => state.cart.hasCartItem);
 
   return (
     <ul id="slide-out" className="container collection sidenav">
+      <h4 className="collection-item teal lighten-2 white-text">Cart List</h4>
       {items.map(item => (
         <Cart key={item.id} item={item} />
       ))}
       <li className="collection-item truncate">
-        <b>TOTAL { hasCartItem ? cartData.attributes.item_count : 0 }</b>
-        <span className="badge">{ hasCartItem ? cartData.attributes.display_item_total : '$0' }</span>
+        <b>TOTAL { (cartData.attributes || {}).item_count }</b>
+        <span className="badge">{ (cartData.attributes || {}).display_item_total }</span>
       </li>
     </ul>
 

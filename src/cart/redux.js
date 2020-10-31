@@ -16,18 +16,12 @@ export const cartGeted = (cartData, items) => ({
   items: items
 });
 
-export const cartAdded = () => ({ 
-  type: ADD_CART,
-  hasCartItem: true
-});
-
 export const cartOpened = (open) => ({ 
   type: OPEN_CART,
   openCart: !open
 });
 
 const initialState = {
-  hasCartItem: false,
   token: '',
   cartData: {},
   items: [],
@@ -47,11 +41,6 @@ export const cartReducer = (state = initialState, action = {}) => {
         ...state,
         cartData: action.cartData, 
         items: action.items,
-      }   
-    case ADD_CART:
-      return {
-        ...state,
-        hasCartItem: action.hasCartItem    
       }   
     default:
       return state
