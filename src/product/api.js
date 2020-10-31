@@ -7,6 +7,7 @@ export const loadProducts = (page = 1) => async dispatch => {
     page: page, per_page: 20, include: 'images', sort: '-updated_at'
   });
   if (result.isSuccess() && result.success().data.length > 0) {
+    console.log(result.success().data)
     return dispatch(productsLoad(result.success().data, result.success().included));
   } else {
     return dispatch(productsLoadended());
