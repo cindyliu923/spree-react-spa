@@ -44,9 +44,37 @@ export const cartList = (token) => async dispatch => {
   const result = await client.cart.show({ orderToken: token }, { include: 'line_items' })
 
   if (result.isSuccess()) {
-    console.log(result.success());
     return dispatch(cartGeted(result.success().data, result.success().included));
   }
 }
 
-// export default loadProducts;
+export const emptyCart = () => async dispatch => { 
+  const token = await dispatch(checkToken()); 
+  const result = await client.cart.emptyCart({ orderToken: token }, { include: 'line_items' });
+  if (result.isSuccess()) {
+    return dispatch(cartGeted(result.success().data, result.success().included));
+  }  
+}
+
+export const removeItem = (id) => async dispatch => { 
+  const token = await dispatch(checkToken()); 
+  const result = await client.cart.removeItem({ orderToken: token }, id)
+
+  if (result.isSuccess()) {
+    return dispatch(getCart());
+  }  
+}
+
+export const setItemQuantity = (id, quantity) => async dispatch => { 
+  if (quantity <= 0) return await dispatch(removeItem(id));
+
+  const token = await dispatch(checkToken()); 
+  const result = await client.cart.setQuantity({ orderToken: token }, { 
+    line_item_id: id,
+    quantity: quantity,
+    include: 'line_items'
+  });
+  if (result.isSuccess()) {
+    return dispatch(cartGeted(result.success().data, result.success().included));
+  }  
+}

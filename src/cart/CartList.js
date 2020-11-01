@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Cart from './Cart';
+import { emptyCart } from '../cart/api';
 
 const CartList = () => {
+  const dispatch = useDispatch();
   const cartData = useSelector(state => state.cart.cartData);
   const items = useSelector(state => state.cart.items);
 
@@ -13,13 +15,15 @@ const CartList = () => {
         <Cart key={item.id} item={item} />
       ))}
       <li className="collection-item truncate">
-        <b>TOTAL { (cartData.attributes || {}).item_count }</b>
-        <span className="badge">{ (cartData.attributes || {}).display_item_total }</span>
+        <b>
+          TOTAL { (cartData.attributes || {}).item_count || 0 }
+          <span className="badge">{ (cartData.attributes || {}).display_item_total || '$0' }</span>
+        </b>
       </li>
+      <a href="#!" className="collection-item active #e53935 red darken-1" onClick={() => dispatch(emptyCart())}>Empty Cart</a>
     </ul>
 
   );
 }
   
 export default CartList;
-

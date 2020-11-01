@@ -1,8 +1,6 @@
 // Actions
 const CREATE_CART = 'spree-rnapp/cart/CREATE_CART';
 const GET_CART = 'spree-rnapp/cart/GET_CART';
-const ADD_CART = 'spree-rnapp/cart/ADD_CART';
-const OPEN_CART = 'spree-rnapp/cart/OPEN_CART';
 
 // Action Creators
 export const cartCreated = (token) => ({ 
@@ -16,16 +14,10 @@ export const cartGeted = (cartData, items) => ({
   items: items
 });
 
-export const cartOpened = (open) => ({ 
-  type: OPEN_CART,
-  openCart: !open
-});
-
 const initialState = {
   token: '',
   cartData: {},
-  items: [],
-  openCart: false
+  items: []
 }
 
 // Reducer
