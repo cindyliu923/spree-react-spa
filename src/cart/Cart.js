@@ -1,13 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setItemQuantity } from '../cart/api';
+import { removeItem, setItemQuantity } from '../cart/api';
 
 const Cart = ({ item }) => {
   const dispatch = useDispatch();
-
+  
   return (
     <li className="collection-item truncate">
-      <span className="title">{ item.attributes.name }</span>
+      <span className="title">
+        { item.attributes.name }
+        <a href="#!" className="valign-wrapper secondary-content"
+          onClick={() => dispatch(removeItem(item.id))}>
+          <i className="material-icons">delete_forever</i>
+        </a>
+      </span>
       <p className="valign-wrapper">
         <a href="#!" className="valign-wrapper">
           <i className="small material-icons center-align" 
