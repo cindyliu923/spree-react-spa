@@ -10,7 +10,8 @@ const Product = ({ product }) => {
   const image = productImages.find((image) => image.attributes.viewable_id === Number(product.id))
   const addItemToCart = async (product) =>  {
     await dispatch(addItem(product));
-    const element = document.getElementById(product.relationships.default_variant.data.id);
+    const element = document.getElementById(product.relationships.default_variant.data.id) ||
+                    document.getElementById('empty');
     element.scrollIntoView(true);
   }   
 
