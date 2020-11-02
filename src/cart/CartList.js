@@ -20,7 +20,7 @@ const CartList = () => {
           <span className="badge">{ (cartData.attributes || {}).display_item_total || '$0' }</span>
         </b>
       </li>
-      <a href="#!" className="collection-item active #e53935 red darken-1" onClick={() => dispatch(emptyCart())}>Empty Cart</a>
+      <a id="empty" href="#!" className="collection-item active #e53935 red darken-1" onClick={() => dispatch(emptyCart())}>Empty Cart</a>
     </ul>
 
   );

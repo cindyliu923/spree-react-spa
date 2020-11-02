@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadProducts } from '../product/api';
-import { cartCreated } from '../cart/redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import Product from './Product';
 import Loading from '../components/Loading';
+import useLoading from '../hooks/useLoading';
  
 const ProductList = () => {
-  const dispatch = useDispatch();
   const page = useSelector(state => state.products.page);
   const products = useSelector(state => state.products.products);
   const isEnding = useSelector(state => state.products.isEnding);
-  const isLoading = useSelector(state => state.products.isLoading);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) { 
-      dispatch(cartCreated(token)); 
-    }
-    dispatch(loadProducts(1))
-  }, [dispatch])
+  const [isLoading, loadingProducts] = useLoading();
 
   return (
     <div>
@@ -30,7 +20,7 @@ const ProductList = () => {
         <button 
           style={isLoading || isEnding ? { display: 'none' } : { display: 'block' }} 
           className="col s12 m12 l12 waves-effect waves-light btn" 
-          onClick={() => dispatch(loadProducts(page))}>
+          onClick={() => loadingProducts(page)}>
           MORE
         </button>
       </div>

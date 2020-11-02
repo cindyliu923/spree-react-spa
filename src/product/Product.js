@@ -8,6 +8,11 @@ const Product = ({ product }) => {
   const dispatch = useDispatch();
   const productImages = useSelector(state => state.products.productImages);
   const image = productImages.find((image) => image['attributes'].viewable_id === Number(product.id))
+  const addItemToCart = async (product) =>  {
+    await dispatch(addItem(product));
+    const element = document.getElementById(product.relationships.default_variant.data.id);
+    element.scrollIntoView(true);
+  }   
 
   return(
     <div className="col s12 m6 l3">
@@ -16,7 +21,7 @@ const Product = ({ product }) => {
           <img src={ image ? HOST + image['attributes'].styles[2].url : defaultImage } alt="product" />
           <button className="btn-floating btn-large halfway-fab waves-effect waves-light red sidenav-trigger show-on-large" 
             data-target="slide-out"
-            onClick={() => dispatch(addItem(product))}>
+            onClick={() => addItemToCart(product)}>
             <i className="material-icons">shopping_cart</i>
           </button>
         </div>

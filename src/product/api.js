@@ -1,8 +1,7 @@
 import client from '../api/client';
-import { productsLoad, productsLoadended, loading } from './redux';
+import { productsLoad, productsLoadended } from './redux';
 
 export const loadProducts = (page = 1) => async dispatch => { 
-  dispatch(loading());
   const result = await client.products.list({
     page: page, per_page: 20, include: 'images', sort: '-updated_at'
   });

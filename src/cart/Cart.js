@@ -6,7 +6,7 @@ const Cart = ({ item }) => {
   const dispatch = useDispatch();
   
   return (
-    <li className="collection-item truncate">
+    <li id={item.relationships.variant.data.id} className="collection-item truncate">
       <span className="title">
         { item.attributes.name }
         <a href="#!" className="valign-wrapper secondary-content"
