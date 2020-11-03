@@ -2,13 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Product from './Product';
 import Loading from '../components/Loading';
-import useLoading from '../hooks/useLoading';
+import useLoadingProducts from '../hooks/useLoadingProducts';
  
 const ProductList = () => {
   const page = useSelector(state => state.products.page);
   const products = useSelector(state => state.products.products);
   const isEnding = useSelector(state => state.products.isEnding);
-  const [isLoading, loadingProducts] = useLoading();
+  const [isLoading, loadingProducts] = useLoadingProducts();
 
   return (
     <div>

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { loadProducts } from '../product/api';
 import { cartCreated } from '../cart/redux';
 
-const useLoading = () => {
+const useLoadingProducts = () => {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,4 +28,4 @@ const useLoading = () => {
   return [isLoading, loadingProducts]
 }
 
-export default useLoading;
+export default useLoadingProducts;
