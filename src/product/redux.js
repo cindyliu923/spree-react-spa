@@ -1,6 +1,6 @@
 // Actions
-const LOAD_PRODUCTS = 'spree-rnapp/product/LOAD_PRODUCTS';
-const LOAD_PRODUCTS_ENDED = 'spree-rnapp/product/LOAD_PRODUCTS_ENDED';
+const LOAD_PRODUCTS = 'spree-react-spa/product/LOAD_PRODUCTS';
+const LOAD_PRODUCTS_ENDED = 'spree-react-spa/product/LOAD_PRODUCTS_ENDED';
 
 // Action Creators
 export const productsLoad = (products, images) => ({ 

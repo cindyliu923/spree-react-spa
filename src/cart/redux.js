@@ -1,6 +1,6 @@
 // Actions
-const CREATE_CART = 'spree-rnapp/cart/CREATE_CART';
-const GET_CART = 'spree-rnapp/cart/GET_CART';
+const CREATE_CART = 'spree-react-spa/cart/CREATE_CART';
+const GET_CART = 'spree-react-spa/cart/GET_CART';
 
 // Action Creators
 export const cartCreated = (token) => ({ 
